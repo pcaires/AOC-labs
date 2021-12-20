@@ -1,5 +1,5 @@
 .data 
-    numbers: .zero 40     # allocate 40 bytes
+    numbers: .zero 40       # allocate 40 bytes
     
 .text
      auipc a3 0x10000       # load address
