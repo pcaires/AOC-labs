@@ -4,7 +4,8 @@
 .text
      auipc a3 0x10000       # load address
      
-     li x11,1   
+     li x11,1               # initialize useful registers
+     li x10,0
      addi a4,a3,36
      
      sw x11, 0(a3)
