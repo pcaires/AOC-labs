@@ -5,10 +5,10 @@
       li x10, 1       #Initialize registers
       li x11, 1
       
-      la a3, numbers    #Get adress to start and end of allocation
-      addi a4, a3, 36
+      la a3, numbers  #Get adress to start and end of allocation
+      addi a4, a3, 32
       
-      sw x11, 0(a3) #Store first Fibonacci number
+      sw x11, 0(a3)   #Store first Fibonacci number
       
 loop: 
       addi a3, a3, 4 #Step by 4
@@ -19,6 +19,8 @@ loop:
       mv x10,x12
       
       bgt a4,a3,loop #Check for completion
+      
+      sw x11, 4(a3) #Save last Fibonacci number
     
 end:                     # exit your program with this sequence
     li a7, 10            # sets register a7 (x17) to 10
