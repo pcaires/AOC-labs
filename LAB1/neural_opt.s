@@ -8,22 +8,18 @@
 li a0,0
 li a1,0
 jal neural_network_xor
-sw a0, 0(x3)
 
 li a0,1
 li a1,0
 jal neural_network_xor
-sw a0, 4(x3)
 
 li a0,0
 li a1,1
 jal neural_network_xor
-sw a0, 8(x3)
 
 li a0,1
 li a1,1
 jal neural_network_xor
-sw a0, 12(x3)
 
 end:             # exit your program with this sequence
     li a7, 10    # sets register a7 (x17) to 10
@@ -80,42 +76,30 @@ jr ra        #return
 ###############################################################
 # Develop your code here
 neuron:
-        
-addi sp,sp,-20
-sw a2,0(sp)
-sw a0,4(sp)
-sw ra,8(sp) #Store s and stack for 1st neuron
-sw s1,12(sp)
-sw s0,16(sp)
+addi sp,sp,-24  # store inputs in convenient order
+sw a0,0(sp)
+sw a2,4(sp)
+sw a1,8(sp)
+sw a3,12(sp)
+sw a4,16(sp)
+sw ra,20(sp)  # store return adress
 
-mv s1,a1 #copy input (a1)
+jal multiply  # multiply x1 w1
+lw a0,0(sp)   # retrieve result
+addi sp,sp,4  # decrease stack
 
-jal multiply #multiply x1 w1
+jal multiply  # multiply x2 w2 = a1
 
-lw s0,0(sp) # get output
+lw a1,0(sp) # retrieve all from stack
+lw a4,4(sp)
+lw ra,8(sp)
+addi sp,sp,12 # decrease stack
 
-addi sp,sp,-4 # alocate 4 more bytes
+add a0,a0,a1  # a0 + a1
+add a0,a0,a4  # a0 + a1 + b
+addi a0,a0,1  # a0 + a1 + b + 1 
 
-sw a3,0(sp)
-sw s1,4(sp) # stack -->[ra s0 a1 a3]
-
-jal multiply #multiply x2 w2
-
-lw s1,0(sp)  # get output
-
-add s0,s0,s1 # x1*w1 + x2*w2
-add s0,s0,a4 # + b
-addi s0,s0,1 # +1
-
-sgtz a0,s0   # s + 1 > 0 <=> s >= 0
-
-addi sp,sp,4 #decrease stack
-
-lw ra,0(sp)  #restore s
-lw s1,4(sp)
-lw s0,8(sp)  #restore ra
-
-addi sp,sp,12 #decrease stack
+sgtz a0,a0   # s + 1 > 0 <=> s >= 0
 
 jr ra
 
