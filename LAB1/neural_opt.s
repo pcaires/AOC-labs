@@ -76,30 +76,34 @@ jr ra        #return
 ###############################################################
 # Develop your code here
 neuron:
-addi sp,sp,-24  # store inputs in convenient order
+addi sp,sp,-28  # store inputs in convenient order
 sw a0,0(sp)
 sw a2,4(sp)
 sw a1,8(sp)
 sw a3,12(sp)
 sw a4,16(sp)
-sw ra,20(sp)  # store return adress
+sw s0,20(sp)  # store s0 
+sw ra,24(sp)  # store return adress
 
 jal multiply  # multiply x1 w1
-lw a0,0(sp)   # retrieve result
+lw s0,0(sp)   # retrieve result
 addi sp,sp,4  # decrease stack
 
 jal multiply  # multiply x2 w2 = a1
 
-lw a1,0(sp) # retrieve all from stack
+lw a1,0(sp) # retrieve useful from stack
 lw a4,4(sp)
-lw ra,8(sp)
-addi sp,sp,12 # decrease stack
 
-add a0,a0,a1  # a0 + a1
+
+add a0,s0,a1  # a0 + a1
 add a0,a0,a4  # a0 + a1 + b
 addi a0,a0,1  # a0 + a1 + b + 1 
 
 sgtz a0,a0   # s + 1 > 0 <=> s >= 0
+
+lw s0,8(sp)   #restore s0
+lw ra,12(sp)  #restore ra
+addi sp,sp,16 # decrease stack
 
 jr ra
 
