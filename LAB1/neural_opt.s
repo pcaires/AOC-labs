@@ -28,9 +28,9 @@ end:             # exit your program with this sequence
 
 ###############################################################
 # multiply: multiplies two numbers and returns the result
-# 	Inputs:  2 (multiplier and multiplicand, passed via stack)
+#   Inputs:  2 (multiplier and multiplicand, passed via stack)
 #   Outputs: 1 (result passed via stack)
-# 	Effects: Deletes inputs from stack, reduces stack size by 1 
+#   Effects: Deletes inputs from stack, reduces stack size by 1 
 #            (inneficient for large multipliers)
 ###############################################################
 # Develop your code here
@@ -72,9 +72,9 @@ jr ra # return
 
 ###############################################################
 # neuron: computes the output of a neuron
-# 	Inputs:  5 - [x1 x2 w1 w2 b] (passed via register, a0 to a4)
+#   Inputs:  5 - [x1 x2 w1 w2 b] (passed via register, a0 to a4)
 #   Outputs: 1 - s (returned via register a0) 
-# 	Effects: Deletes inputs from register
+#   Effects: Deletes inputs from register
 ###############################################################
 # Develop your code here
 neuron:
@@ -112,9 +112,9 @@ jr ra #Return
 ###############################################################
 # neural_network_xor: computes the output of XOR gate 
 # using a small neural network
-# 	Inputs:  2 passed via register (a0,a1)
+#   Inputs:  2 passed via register (a0,a1)
 #   Outputs: 1 passed via register (a0)
-# 	Effects: Will change a2 to a4 (constant parameters of neuron)
+#   Effects: Will change a2 to a4 (constant parameters of neuron)
 ###############################################################
 # Develop your code here
 neural_network_xor:
