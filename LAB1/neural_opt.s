@@ -64,7 +64,6 @@ sw s0,16(sp)    # store result
 lw s0,0(sp)     # restore s
 lw s1,4(sp)
 lw s2,8(sp)
-lw s3,12(sp)
 
 addi sp, sp, 16
 
