@@ -39,8 +39,8 @@ sw s0,0(sp)
 sw s1,4(sp)     # save s
 sw s2,8(sp)   
     
-lw s1,12(sp)    # load inputs
-lw s0,16(sp)
+lw s0,12(sp)    # load inputs
+lw s1,16(sp)
 
 beqz s0, return # If s0 is zero, skip (result is 0)
 
