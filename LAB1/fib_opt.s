@@ -19,6 +19,6 @@ proc:                       # algorithm
                
      bne a3,a4,proc         # check for completion
     
-end:                     # exit your program with this sequence
-    li a7, 10            # sets register a7 (x17) to 10
-    ecall                # system call: exit the program with code 0
+end:                        # exit your program with this sequence
+    li a7, 10               # sets register a7 (x17) to 10
+    ecall                   # system call: exit the program with code 0
