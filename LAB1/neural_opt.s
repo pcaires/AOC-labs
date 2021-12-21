@@ -29,8 +29,9 @@ end:             # exit your program with this sequence
 ###############################################################
 # multiply: multiplies two numbers and returns the result
 # 	Inputs:  2 (multiplier and multiplicand, passed via stack)
-#	Outputs: 1 (result passed via stack)
-# 	Effects: Deletes inputs from stack, reduces stack size by 1 (inneficient for large multipliers)
+#   Outputs: 1 (result passed via stack)
+# 	Effects: Deletes inputs from stack, reduces stack size by 1 
+#            (inneficient for large multipliers)
 ###############################################################
 # Develop your code here
 multiply:
@@ -54,9 +55,9 @@ neg s1,s1       # else negate sign
 neg s2,s2       # and negate the "adder", i.e negate final signal
 
 loop: 
-add s0,s0,s2    #Accumulate multiplicand
-addi s1,s1,-1   #Reduce Multiplier
-bnez s1,loop    #If multiplier 0, proceed
+add s0,s0,s2    # accumulate multiplicand
+addi s1,s1,-1   # reduce Multiplier
+bnez s1,loop    # if multiplier 0, proceed
 
 return:
 sw s0,16(sp)    # store result    
@@ -72,7 +73,7 @@ jr ra # return
 ###############################################################
 # neuron: computes the output of a neuron
 # 	Inputs:  5 - [x1 x2 w1 w2 b] (passed via register, a0 to a4)
-#	Outputs: 1 - s (returned via register a0) 
+#   Outputs: 1 - s (returned via register a0) 
 # 	Effects: Deletes inputs from register
 ###############################################################
 # Develop your code here
@@ -112,50 +113,50 @@ jr ra #Return
 # neural_network_xor: computes the output of XOR gate 
 # using a small neural network
 # 	Inputs:  2 passed via register (a0,a1)
-#	Outputs: 1 passed via register (a0)
+#   Outputs: 1 passed via register (a0)
 # 	Effects: Will change a2 to a4 (constant parameters of neuron)
 ###############################################################
 # Develop your code here
 neural_network_xor:
 li a2,2
-li a3,-2    #Constant inputs
+li a3,-2    # constant inputs
 li a4,-1
 
 addi sp,sp,-16
 sw s0,0(sp)
 sw s1,4(sp)
-sw s2,8(sp) #Store s and ra
+sw s2,8(sp) # store s and ra
 sw ra,12(sp)
 
-mv s0,a0    #Copy input a0 and a1
+mv s0,a0    # copy input a0 and a1
 mv s1,a1
 
-jal neuron  #Call 1st neuron
-mv s2,a0    #Move result to s2
+jal neuron  # call 1st neuron
+mv s2,a0    # move result to s2
 
-li a2,-2    #Inputs for neuron 2
+li a2,-2    # inputs for neuron 2
 li a3,2
 li a4,-1
 mv a0,s0
 mv a1,s1
 
-jal neuron  #Call second neuron
+jal neuron  # call second neuron
 
 li a2,2
 li a3,2
-li a4,-1    #Inputs for final neuron
-mv a1,a0    #s2 had result of 1st neuron, a0 of second
+li a4,-1    # inputs for final neuron
+mv a1,a0    # s2 had result of 1st neuron, a0 of second
 mv a0,s2
 
-jal neuron  #Final neuron - Final result on a0
+jal neuron  # final neuron - final result on a0
 
 lw s0,0(sp)
-lw s1,4(sp) #Restore s and pointer
+lw s1,4(sp) # restore s and pointer
 lw s2,8(sp)
 lw ra,12(sp)
 addi sp,sp,16
 
-jr ra #Return
+jr ra       # return
 
 
 
