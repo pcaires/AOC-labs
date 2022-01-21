@@ -1,10 +1,10 @@
 # Data section
         .data
 # IMPORTANT: do not change this section
-a:		.word  1, 5, 6, 6, 7, 2, 5, 2, 3, 2, 3, 4
-b:		.word  4, 3, 1, 7, 2, 4, 9, -3, 5, 8, 1, 9
-x: 		.word  1
-n:		.word  0   
+a:	.word  1, 5, 6, 6, 7, 2, 5, 2, 3, 2, 3, 4
+b:	.word  4, 3, 1, 7, 2, 4, 9, -3, 5, 8, 1, 9
+x: 	.word  1
+n:	.word  0   
 
 # Program section
 	.text
