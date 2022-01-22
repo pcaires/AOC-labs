@@ -15,8 +15,7 @@ n:	.word  0
 
 	lw 	x14, 100(x3)		# x14 - n - index distance accumulator
 	lw	x15, 96(x3)		# x15 - x
-	li 	x16, 0			# x16 - i
-	nop 
+	li 	x16, 0			# x16 - i 
 	
 while:	add	x20, x13, x16		# x20 = &b[i]
 	lw	x21, 0(x20)		# x21 = b[i]
