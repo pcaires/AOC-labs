@@ -25,9 +25,9 @@ while:
         lw     x23, 0(x12)		# x23 = a[N-1-i] 
         lw     x21, 0(x20)		# x21 = b[i]      
 
-        lw     x24, 4(x20)		# x21 = b[i]
-        lw     x25, 4(x11)		# x22 = a[i]        
-        lw     x26, -4(x12)		# x23 = a[N-1-i]     
+        lw     x24, 4(x20)		#Equivalent to x21,x22,x23 
+        lw     x25, 4(x11)		#For next loop        
+        lw     x26, -4(x12)		    
 	
         blez   x21, end			# if b[i] <= 0 end the loop
         
@@ -40,16 +40,16 @@ while:
 
         blez   x24, end			# if b[i] <= 0 end the loop   
         
-        add    x25, x25, x26		# x22 = a[i] + a[N-1-i]
-        mul    x15, x15, x25		# x15 = x15*x22 (x *= a[i] + a[N-1-i])
+        add    x25, x25, x26	
+        mul    x15, x15, x25	
 
-        add    x14, x14, x22		# n += x22
-        addi   x14, x14, -2
+        add    x14, x14, x22		#One instruction less than "1st loop"
+        addi   x14, x14, -2     	#We know how x12-x11 changed
         
         addi   x12, x12, -8
-        addi   x16, x16, 8		# i++
-        addi   x11, x11, 8
-
+        addi   x16, x16, 8		# i++, but 8, because "2 loops"
+        addi   x11, x11, 8      	#were performed
+ 
         jal    x0, while
 
 end:    sw     x14, 100(x3)		# store n's final value
