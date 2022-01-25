@@ -19,8 +19,8 @@ n:	.word  0
 
 while:  add    x20, x13, x16   # x20 = &b[i]
         lw     x21, 0(x20)	# x21 = b[i]
-        lw     x22, 0(x11)	# x22 = a[i]        %CHANGED TO BEFORE BLEZ
-        lw     x23, 0(x12)	# x23 = a[N-1-i]    %
+        lw     x22, 0(x11)	# x22 = a[i]        %changed to before blez
+        lw     x23, 0(x12)	# x23 = a[N-1-i]    %changed to before blez
 	
         blez   x21, end	# if b[i] <= 0 end the loop
         
