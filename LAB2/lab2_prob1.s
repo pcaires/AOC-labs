@@ -10,11 +10,11 @@ n:		.word  0
 .text
 		                        # NOTE: Upon start, the Global-Pointer (gp=x3) points to the beginning of .data section
 	addi    x11, x3, 0		# x11 - a's left index
-        nop
-        nop
+	nop
+	nop
 	addi    x13, x11, 48		# x13 - b's left index
-        nop
-        nop
+ 	nop
+	nop
 	addi	x12, x13, -4		# x12 - a's right index
 		
 	lw 	x14, 100(x3)		# x14 - n - index distance accumulator
@@ -22,9 +22,10 @@ n:		.word  0
 	li 	x16, 0			# x16 - i
 
 	nop 
-        nop 
+	nop 
+	
 while:  add	x20, x13, x16		# x20 = &b[i]
-        nop
+	nop
         nop
 	lw	x21, 0(x20)		# x21 = b[i]
         nop
