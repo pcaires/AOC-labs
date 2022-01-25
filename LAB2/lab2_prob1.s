@@ -55,7 +55,7 @@ while:  add	x20, x13, x16		# x20 = &b[i]
         addi	x12, x12, -4
         jal 	x0, while
 
-end:	sw 	x14, 100(x3)		# store n's final value
+end:    sw 	x14, 100(x3)		# store n's final value
         sw 	x15, 96(x3)		# store x's final value	
 
         addi	a7, x0, 10
