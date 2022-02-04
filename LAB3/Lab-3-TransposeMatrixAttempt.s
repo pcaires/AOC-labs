@@ -114,7 +114,7 @@ f1loop3:
         # A -= N*4 (rewind to the first element of the row)
         sub a0, a0, a3
         # B++
-        addi a1, a1, 4
+        add a1, a1, a3
         # auxB = B
         add  t0, zero, a1
         # for(...,...,j++)
@@ -125,7 +125,7 @@ f1loop3:
         # A += N*4 (moves to the next row)
         add a0, a0, a3
         # B -= N*4 (rewind to the first element of the row)
-        sub a1, a1, a3
+        add a1, zero, s6
         # auxB = B
         add t0, zero, a1
         # for(...,...,i++)
@@ -144,11 +144,11 @@ f1loop3:
         add a1, zero, s4 # a1 -> *D
         add a2, zero, s5 # a2 -> *T1
 
-        # for(j=0,...,...){
-        add t0, zero, zero 
-f2loop1:
         # for(i=0,...,...){
         add t1, zero, zero
+f2loop1:  
+        # for(j=0,...,...){
+        add t0, zero, zero 
 f2loop2:
         # ... = ... + ...*C[i][j]
         lw t2, 0(a0)
@@ -162,16 +162,16 @@ f2loop2:
         add t5, t5, t4
         # D[i][j] = aux1;
         sw t5, 0(a1)
-        # C += N*4 (moves to the next row)
-        add a0, a3, a0
-        # D += N*4 (moves to the next row)
-        add a1, a3, a1
-        # T1 += N*4 (moves to the next row)
-        add a2, a3, a2
-        # for(...,...,i++)
-        addi t1, t1, 1
-        # for(...,i<size,...)
-        blt t1, s9, f2loop2
+        # C += N*4 (moves to the next row) #column
+        addi a0, a0, 4
+        # D += N*4 (moves to the next row) #column
+        addi a1, a1, 4
+        # T1 += N*4 (moves to the next row) #column
+        addi a2, a2, 4
+        # for(...,...,i++)   #j++
+        addi t0, t0, 1
+        # for(...,i<size,...) #if j
+        blt t0, s9, f2loop2
         # }
         # C -= N*N*4 (rewind to the first element of the matrix) 
         add a0, zero, s3
@@ -179,19 +179,19 @@ f2loop2:
         add a1, zero, s4
         # T1 -= N*N*4 (rewind to the first element of the matrix) 
         add a2, zero, s5
-        # for(...,...,j++)
-        addi t0, t0, 1
-        # aux2 = j*4
-        addi t1, zero, 4
-        mul t1, t0, t1
+        # for(...,...,j++) #i++
+        addi t1, t1, 1
+        # aux2 = j*4 #i*4 aux is now t0
+        add t0, zero, a3
+        mul t0, t0, t1
         # C += aux2
-        add a0, t1, a0
+        add a0, t0, a0
         # D += aux2
-        add a1, t1, a1
+        add a1, t0, a1
         # T1 += aux2
-        add a2, t1, a2  
+        add a2, t0, a2  
         # for(...,j<N,...)
-        blt t0, s9, f2loop1
+        blt t1, s9, f2loop1
         # }
 
 
