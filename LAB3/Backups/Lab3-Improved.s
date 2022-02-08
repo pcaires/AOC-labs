@@ -135,7 +135,7 @@ f1loop3:
         # A += N*4 (moves to the next row)
         add a0, a0, a3
         # B -= N*4 (rewind to the first element of the row) #of column
-        add a1, a1, s6
+        add a1, zero, s6
         # auxB = B
         add t0, zero, a1
         # for(...,...,i++)
