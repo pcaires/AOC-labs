@@ -99,7 +99,7 @@ f1loop3:
         add a1, zero, s4 # a1 -> *D
         add a2, zero, s5 # a2 -> *T1
 
-        # for(i=0,...,...){ #Order in now IJ
+        # for(i=0,...,...){ #Order is now IJ
         add t1, zero, zero
 f2loop1:  
         # for(j=0,...,...){ 
